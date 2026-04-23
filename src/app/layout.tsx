@@ -14,6 +14,9 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "Kryto Studio | Crafting Digital Excellence",
   description: "High-end Dev & Edit Studio providing Custom Web Development, App Development, and High-End Video Editing.",
+  icons: {
+    icon: "/favicon.ico?v=2",
+  },
 };
 
 export default function RootLayout({
