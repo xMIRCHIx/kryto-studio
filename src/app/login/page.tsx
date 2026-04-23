@@ -46,11 +46,11 @@ function LoginContent() {
   };
 
   const getURL = () => {
-    let url = 'https://kryto-studio.vercel.app/'; // Live URL
+    let url = 'https://kryto-studio.vercel.app'; // No trailing slash here
     if (typeof window !== 'undefined' && window.location.origin.includes('localhost')) {
-      url = 'http://localhost:3000/'; // Local development
+      url = 'http://localhost:3000';
     }
-    return url;
+    return `${url}/auth/callback`;
   };
 
   const handleGoogleLogin = async () => {
@@ -58,7 +58,7 @@ function LoginContent() {
       const { error } = await supabase.auth.signInWithOAuth({
         provider: "google",
         options: {
-          redirectTo: `${getURL()}auth/callback`,
+          redirectTo: getURL(),
         },
       });
       if (error) throw error;
