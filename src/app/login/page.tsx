@@ -28,9 +28,11 @@ function LoginContent() {
 
     try {
       if (isSignUp) {
-        const { error } = await supabase.auth.signUp({ email, password });
+        const { data, error } = await supabase.auth.signUp({ email, password });
         if (error) throw error;
-        alert("Success! Check your email for a confirmation link.");
+        
+        // If Supabase has 'Confirm Email' disabled, data.session will be populated and they are auto-logged in.
+        window.location.href = "/";
       } else {
         const { error } = await supabase.auth.signInWithPassword({ email, password });
         if (error) throw error;
@@ -43,20 +45,13 @@ function LoginContent() {
     }
   };
 
-  const getURL = () => {
-    let url = process.env.NEXT_PUBLIC_SITE_URL ?? 
-              'https://kryto-studio.vercel.app/';
-    url = url.includes('http') ? url : `https://${url}`;
-    url = url.charAt(url.length - 1) === '/' ? url : `${url}/`;
-    return url;
-  }
-
   const handleGoogleLogin = async () => {
     try {
+      const redirectURL = window.location.origin + '/auth/callback';
       const { error } = await supabase.auth.signInWithOAuth({
         provider: "google",
         options: {
-          redirectTo: `${getURL()}auth/callback`,
+          redirectTo: redirectURL,
         },
       });
       if (error) throw error;
