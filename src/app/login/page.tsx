@@ -3,7 +3,7 @@
 import { useState, useEffect, Suspense } from "react";
 import { motion } from "framer-motion";
 import { useSearchParams } from "next/navigation";
-import { Mail, Lock, LogIn, Loader2, Globe } from "lucide-react";
+import { Mail, Lock, LogIn, Loader2 } from "lucide-react";
 import { supabase } from "@/utils/supabase/client";
 
 function LoginContent() {
@@ -43,12 +43,20 @@ function LoginContent() {
     }
   };
 
+  const getURL = () => {
+    let url = process.env.NEXT_PUBLIC_SITE_URL ?? 
+              'https://kryto-studio.vercel.app/';
+    url = url.includes('http') ? url : `https://${url}`;
+    url = url.charAt(url.length - 1) === '/' ? url : `${url}/`;
+    return url;
+  }
+
   const handleGoogleLogin = async () => {
     try {
       const { error } = await supabase.auth.signInWithOAuth({
         provider: "google",
         options: {
-          redirectTo: "http://localhost:3000/auth/callback",
+          redirectTo: `${getURL()}auth/callback`,
         },
       });
       if (error) throw error;
@@ -146,7 +154,7 @@ function LoginContent() {
           type="button"
           className="w-full bg-white/5 hover:bg-white/10 border border-white/10 text-white font-medium py-3 rounded-xl transition-all flex items-center justify-center gap-2"
         >
-          <Globe size={18} /> Google
+          <img src="/google-logo.png" alt="Google" className="h-5 w-auto object-contain" /> Continue with Google
         </button>
 
         <p className="text-center text-sm text-gray-400 mt-8">
