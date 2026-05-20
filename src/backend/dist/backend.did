@@ -1,0 +1,153 @@
+type _ImmutableObjectStorageRefillResult = 
+ record {
+   success: opt bool;
+   topped_up_amount: opt nat;
+ };
+type _ImmutableObjectStorageRefillInformation = record {
+                                                  proposed_top_up_amount:
+                                                   opt nat;};
+type _ImmutableObjectStorageCreateCertificateResult = 
+ record {
+   blob_hash: text;
+   method: text;
+ };
+type UserRole = 
+ variant {
+   admin;
+   guest;
+   user;
+ };
+type ServiceType = 
+ variant {
+   graphicsDesign;
+   uiUxDesign;
+   videoEditing;
+   webAppDev;
+ };
+type ReviewInput = 
+ record {
+   clientName: text;
+   rating: nat;
+   reviewText: text;
+   serviceType: ServiceType;
+ };
+type Review = 
+ record {
+   clientName: text;
+   createdAt: int;
+   id: nat;
+   rating: nat;
+   reviewText: text;
+   serviceType: ServiceType;
+ };
+type PortfolioItemInput = 
+ record {
+   description: text;
+   mediaType: MediaType;
+   serviceType: ServiceType;
+   thumbnailUrl: opt text;
+   title: text;
+   url: text;
+   videoBlob: opt ExternalBlob;
+ };
+type PortfolioItem = 
+ record {
+   createdAt: int;
+   description: text;
+   id: nat;
+   mediaType: MediaType;
+   serviceType: ServiceType;
+   thumbnailUrl: opt text;
+   title: text;
+   url: text;
+   videoBlob: opt ExternalBlob;
+ };
+type MediaType = 
+ variant {
+   link;
+   video;
+ };
+type ExternalBlob = blob;
+type AppointmentStatus = 
+ variant {
+   cancelled;
+   confirmed;
+   pending;
+ };
+type AppointmentInput = 
+ record {
+   dateTime: text;
+   email: text;
+   name: text;
+   phone: text;
+   projectDescription: text;
+   serviceType: ServiceType;
+ };
+type Appointment = 
+ record {
+   createdAt: int;
+   dateTime: text;
+   email: text;
+   id: nat;
+   name: text;
+   phone: text;
+   projectDescription: text;
+   serviceType: ServiceType;
+   status: AppointmentStatus;
+ };
+service : {
+  _immutableObjectStorageBlobsAreLive: (hashes: vec blob) -> (vec bool) query;
+  _immutableObjectStorageBlobsToDelete: () -> (vec blob) query;
+  _immutableObjectStorageConfirmBlobDeletion: (blobs: vec blob) -> ();
+  _immutableObjectStorageCreateCertificate: (blobHash: text) ->
+   (_ImmutableObjectStorageCreateCertificateResult);
+  _immutableObjectStorageRefillCashier: (refillInformation:
+   opt _ImmutableObjectStorageRefillInformation) ->
+   (_ImmutableObjectStorageRefillResult);
+  _immutableObjectStorageUpdateGatewayPrincipals: () -> ();
+  _initializeAccessControl: () -> ();
+  addPortfolioItem: (item: PortfolioItemInput) ->
+   (variant {
+      err: text;
+      ok: nat;
+    });
+  addReview: (review: ReviewInput) -> (variant {
+                                         err: text;
+                                         ok: nat;
+                                       });
+  assignCallerUserRole: (user: principal, role: UserRole) -> ();
+  deletePortfolioItem: (id: nat) -> (variant {
+                                       err: text;
+                                       ok;
+                                     });
+  deleteReview: (id: nat) -> (variant {
+                                err: text;
+                                ok;
+                              });
+  getAppointments: () -> (vec Appointment) query;
+  getCallerUserRole: () -> (UserRole) query;
+  getPortfolioByService: (serviceType: ServiceType) ->
+   (vec PortfolioItem) query;
+  getPortfolioItems: () -> (vec PortfolioItem) query;
+  getReviews: () -> (vec Review) query;
+  isCallerAdmin: () -> (bool) query;
+  submitAppointment: (appointment: AppointmentInput) ->
+   (variant {
+      err: text;
+      ok: nat;
+    });
+  updateAppointmentStatus: (id: nat, status: AppointmentStatus) ->
+   (variant {
+      err: text;
+      ok;
+    });
+  updatePortfolioItem: (id: nat, item: PortfolioItemInput) ->
+   (variant {
+      err: text;
+      ok;
+    });
+  updateReview: (id: nat, review: ReviewInput) -> (variant {
+                                                     err: text;
+                                                     ok;
+                                                   });
+}

@@ -1,0 +1,140 @@
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --font-display: Space Grotesk;
+    --font-body: DM Sans;
+    --font-mono: monospace;
+    --radius: 0.625rem;
+
+    --background: 0.14 0.008 260;
+    --foreground: 0.95 0.012 260;
+    --card: 0.18 0.012 260;
+    --card-foreground: 0.95 0.012 260;
+    --popover: 0.2 0.015 260;
+    --popover-foreground: 0.95 0.012 260;
+
+    --primary: 0.7 0.25 190;
+    --primary-foreground: 0.98 0.008 190;
+
+    --secondary: 0.2 0.015 260;
+    --secondary-foreground: 0.88 0.01 260;
+    --muted: 0.2 0.015 260;
+    --muted-foreground: 0.58 0.008 260;
+
+    --accent: 0.65 0.22 40;
+    --accent-foreground: 0.14 0.008 40;
+
+    --destructive: 0.55 0.22 25;
+    --destructive-foreground: 0.98 0.008 25;
+
+    --border: 0.26 0.015 260;
+    --input: 0.26 0.015 260;
+    --ring: 0.7 0.25 190;
+
+    --chart-1: 0.7 0.25 190;
+    --chart-2: 0.65 0.22 40;
+    --chart-3: 0.55 0.2 120;
+    --chart-4: 0.75 0.18 280;
+    --chart-5: 0.6 0.18 150;
+
+    --sidebar: 0.16 0.01 260;
+    --sidebar-foreground: 0.95 0.012 260;
+    --sidebar-primary: 0.7 0.25 190;
+    --sidebar-primary-foreground: 0.14 0.008 260;
+    --sidebar-accent: 0.2 0.015 260;
+    --sidebar-accent-foreground: 0.88 0.01 260;
+    --sidebar-border: 0.26 0.015 260;
+    --sidebar-ring: 0.7 0.25 190;
+  }
+
+  .dark {
+    --background: 0.14 0.008 260;
+    --foreground: 0.95 0.012 260;
+    --card: 0.18 0.012 260;
+    --card-foreground: 0.95 0.012 260;
+    --popover: 0.2 0.015 260;
+    --popover-foreground: 0.95 0.012 260;
+
+    --primary: 0.7 0.25 190;
+    --primary-foreground: 0.14 0.008 260;
+
+    --secondary: 0.2 0.015 260;
+    --secondary-foreground: 0.88 0.01 260;
+    --muted: 0.2 0.015 260;
+    --muted-foreground: 0.58 0.008 260;
+
+    --accent: 0.65 0.22 40;
+    --accent-foreground: 0.14 0.008 40;
+
+    --destructive: 0.55 0.22 25;
+    --destructive-foreground: 0.98 0.008 25;
+
+    --border: 0.26 0.015 260;
+    --input: 0.26 0.015 260;
+    --ring: 0.7 0.25 190;
+
+    --chart-1: 0.7 0.25 190;
+    --chart-2: 0.65 0.22 40;
+    --chart-3: 0.55 0.2 120;
+    --chart-4: 0.75 0.18 280;
+    --chart-5: 0.6 0.18 150;
+
+    --sidebar: 0.16 0.01 260;
+    --sidebar-foreground: 0.95 0.012 260;
+    --sidebar-primary: 0.7 0.25 190;
+    --sidebar-primary-foreground: 0.14 0.008 260;
+    --sidebar-accent: 0.2 0.015 260;
+    --sidebar-accent-foreground: 0.88 0.01 260;
+    --sidebar-border: 0.26 0.015 260;
+    --sidebar-ring: 0.7 0.25 190;
+  }
+
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground font-body antialiased;
+  }
+}
+
+@layer utilities {
+  .transition-smooth {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+}
+
+.font-display {
+  font-family: var(--font-display), sans-serif;
+}
+
+.shadow-subtle {
+  box-shadow: 0 1px 3px oklch(0 0 0 / 0.4), 0 1px 2px oklch(0 0 0 / 0.24);
+}
+
+.gradient-text {
+  background: linear-gradient(
+    135deg,
+    oklch(var(--primary)),
+    oklch(var(--accent))
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.glow-primary {
+  box-shadow: 0 0 20px oklch(var(--primary) / 0.3), 0 0 40px
+    oklch(var(--primary) / 0.1);
+}
+
+.bg-grid-pattern {
+  background-image: linear-gradient(
+      oklch(var(--border) / 0.4) 1px,
+      transparent 1px
+    ), linear-gradient(90deg, oklch(var(--border) / 0.4) 1px, transparent 1px);
+  background-size: 40px 40px;
+}

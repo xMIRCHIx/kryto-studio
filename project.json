@@ -1,0 +1,23 @@
+{
+  "overview": "Kryto Studio is a full-stack portfolio and business website for a developer/designer brand. It features a public-facing site with Home, Services, Portfolio, and Contact/Appointment pages — plus a login-protected admin panel to manage all content including portfolio uploads, client reviews, and appointment bookings.",
+  "features": [
+    "Admin login-protected dashboard",
+    "Portfolio management with video uploads and website links by service type",
+    "Separate portfolio sections per service (Web/App Dev, Video Editing, Graphics Design, UI/UX)",
+    "Client reviews with star ratings on Services page",
+    "Appointment booking with name, phone, email, service type, date/time, project description",
+    "Home page with hero section and brand intro",
+    "One-page scroll Services section with reviews"
+  ],
+  "category": "portfolio-business",
+  "tags": [
+    "portfolio",
+    "studio",
+    "admin-panel",
+    "booking",
+    "video",
+    "design",
+    "freelance"
+  ],
+  "last_updated": "2026-05-20T04:26:34.811Z"
+}

@@ -1,5 +1,28 @@
-<!-- BEGIN:nextjs-agent-rules -->
-# This is NOT the Next.js you know
+# Project Guidance
 
-This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` before writing any code. Heed deprecation notices.
-<!-- END:nextjs-agent-rules -->
+## User Preferences
+
+[No preferences yet]
+
+## Verified Commands
+
+**Frontend** (run from `src/frontend/`):
+
+- **install**: `pnpm install --prefer-offline`
+- **typecheck**: `pnpm typecheck`
+- **lint fix**: `pnpm fix`
+- **build**: `pnpm build`
+
+**Backend** (run from `src/backend/`):
+
+- **install**: `mops install`
+- **typecheck**: `mops check --fix`
+- **build**: `mops build`
+
+**Backend and frontend integration** (run from root):
+
+- **generate bindings**: `pnpm bindgen` This step is necessary to ensure the frontend can call the backend methods.
+
+## Learnings
+
+[No learnings yet]

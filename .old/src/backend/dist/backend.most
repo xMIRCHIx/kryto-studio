@@ -1,0 +1,78 @@
+// Version: 1.0.0
+type AppointmentStatus__679172861 = {#cancelled; #confirmed; #pending};
+type Appointment__607105078 =
+  {
+    createdAt : Int;
+    dateTime : Text;
+    email : Text;
+    id : Nat;
+    name : Text;
+    phone : Text;
+    projectDescription : Text;
+    serviceType : ServiceType__681164043;
+    status : AppointmentStatus__679172861
+  };
+type Data__791452850<K, V> =
+  {var count : Nat__490723111; kvs : [var ?(K, V)]};
+type ExternalBlob__671167343 = Blob;
+type Internal__8484328<K, V> =
+  {children : [var ?Node__46230540<K, V>]; data : Data__791452850<K, V>};
+type Leaf__809889148<K, V> = {data : Data__791452850<K, V>};
+type Map__158565046<K, V> = Map__297112838<K, V>;
+type Map__297112838<K, V> =
+  {var root : Node__46230540<K, V>; var size : Nat__490723111};
+type Map__605269027<K, V> = Map__158565046<K, V>;
+type MediaType__62654021 = {#link; #video};
+type Nat__490723111 = Nat__920180692;
+type Nat__920180692 = Nat;
+type Node__46230540<K, V> =
+  {#internal : Internal__8484328<K, V>; #leaf : Leaf__809889148<K, V>};
+type PortfolioItem__647824454 =
+  {
+    createdAt : Int;
+    description : Text;
+    id : Nat;
+    mediaType : MediaType__62654021;
+    serviceType : ServiceType__681164043;
+    thumbnailUrl : ?Text;
+    title : Text;
+    url : Text;
+    videoBlob : ?ExternalBlob__671167343
+  };
+type Review__1033506721 =
+  {
+    clientName : Text;
+    createdAt : Int;
+    id : Nat;
+    rating : Nat;
+    reviewText : Text;
+    serviceType : ServiceType__681164043
+  };
+type ServiceType__681164043 =
+  {#graphicsDesign; #uiUxDesign; #videoEditing; #webAppDev};
+type UserRole__1073662873 = {#admin; #guest; #user};
+actor {
+  stable accessControlState :
+    {
+      var adminAssigned : Bool;
+      userRoles : Map__605269027<Principal, UserRole__1073662873>
+    };
+  stable appointments :
+    {
+      var root : Node__46230540<Nat, Appointment__607105078>;
+      var size : Nat__490723111
+    };
+  stable appointmentsState : {var nextId : Nat};
+  stable portfolioItems :
+    {
+      var root : Node__46230540<Nat, PortfolioItem__647824454>;
+      var size : Nat__490723111
+    };
+  stable portfolioState : {var nextId : Nat};
+  stable reviews :
+    {
+      var root : Node__46230540<Nat, Review__1033506721>;
+      var size : Nat__490723111
+    };
+  stable reviewsState : {var nextId : Nat}
+};
